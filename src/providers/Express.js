@@ -7,6 +7,7 @@ import express from 'express';
 
 import Log from '../middlewares/Log';
 import Locals from './Locals';
+import Routes from './Routes';
 import Bootstrap from '../middlewares/Kernel';
 import ExceptionHandler from '../middlewares/Handler';
 
@@ -17,6 +18,7 @@ class Express {
     constructor() {
         this.express = express();
         this.mountMiddlewares();
+        this.mountRoutes();
     }
 
     /**
@@ -27,16 +29,23 @@ class Express {
     }
 
     /**
+   * Mounts all the defined routes
+   */
+    mountRoutes() {
+        this.express = Routes.mountWeb(this.express);
+    }
+
+    /**
    * Starts the express server
    */
     init() {
         const { port } = Locals.config();
 
+        this.express = ExceptionHandler.notFoundHandler(this.express);
         // Registering Exception / Error Handlers
         this.express.use(ExceptionHandler.logErrors);
         this.express.use(ExceptionHandler.clientErrorHandler);
         this.express.use(ExceptionHandler.errorHandler);
-        this.express = ExceptionHandler.notFoundHandler(this.express);
 
         // Start the server on the specified port
         this.express.listen(port, (_error) => {
