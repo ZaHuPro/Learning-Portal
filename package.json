@@ -1,0 +1,30 @@
+{
+  "name": "learning-portal",
+  "version": "1.0.0",
+  "description": "An assignment project based on adaptive learning portal",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --config jestconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZaHuPro/Learning-Portal.git"
+  },
+  "keywords": [
+    "portal",
+    "exam",
+    "learning",
+    "students"
+  ],
+  "author": "ZaHuPro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ZaHuPro/Learning-Portal/issues"
+  },
+  "homepage": "https://github.com/ZaHuPro/Learning-Portal#readme",
+  "dependencies": {
+    "prettier": "^1.19.1",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0"
+  }
+}
