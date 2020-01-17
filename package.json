@@ -4,9 +4,10 @@
   "description": "An assignment project based on adaptive learning portal",
   "main": "index.js",
   "scripts": {
+    "start": "node -r @babel/register ./src",
+    "watch": "nodemon -r @babel/register ./src/index.js",
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix",
-    "prettier-watch": "onchange '**/*.js' -- prettier --write {{changed}}",
     "test": "jest"
   },
   "repository": {
@@ -25,8 +26,15 @@
     "url": "https://github.com/ZaHuPro/Learning-Portal/issues"
   },
   "homepage": "https://github.com/ZaHuPro/Learning-Portal#readme",
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
   "dependencies": {},
   "devDependencies": {
+    "@babel/preset-env": "^7.8.3",
+    "@babel/register": "^7.8.3",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.20.0",
