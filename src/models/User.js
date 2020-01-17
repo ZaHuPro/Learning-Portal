@@ -6,6 +6,7 @@ module.exports = function UserIS(sequelize, DataTypes) {
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true,
             field: 'id',
+            unique: true,
         },
         email: {
             type: DataTypes.STRING,
@@ -34,8 +35,7 @@ module.exports = function UserIS(sequelize, DataTypes) {
     });
 
     User.associate = function Associate(db) {
-        // eslint-disable-next-line no-console
-        console.log(db);
+        db.User.hasMany(db.Answer, { foreignKey: 'user_id', sourceKey: 'id' });
     };
     return User;
 };

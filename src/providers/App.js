@@ -26,7 +26,7 @@ class App {
     // Loads Express Server
     static loadServer() {
         Log.info('Server :: Booting...');
-        Express.init();
+        return Express.init();
     }
 }
 

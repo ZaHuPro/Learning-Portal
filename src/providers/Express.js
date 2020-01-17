@@ -53,10 +53,11 @@ class Express {
                 return console.log('Error: ', _error);
             }
             Log.info(`Server :: Running @ ${port}`);
-            return console.log(
+            console.log(
                 '\x1b[33m%s\x1b[0m',
                 `Server :: Running @ 'http://localhost:${port}'`,
             );
+            return this.express;
         });
     }
 }
