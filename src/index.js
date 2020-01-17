@@ -1,6 +1,15 @@
-const j = 1;
-const d = 2;
+/**
+ * Bootstrap your App
+ *
+ */
 
-const a = j + d;
+import App from './providers/App';
+/*
+ * clear Console
+ */
+App.clearConsole();
 
-export default a;
+/*
+ * Load Configuration
+ */
+App.loadConfiguration();
