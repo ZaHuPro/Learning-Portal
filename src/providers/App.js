@@ -1,5 +1,7 @@
 import * as path from 'path';
 import * as dotenv from 'dotenv';
+
+import Express from './Express';
 import Log from '../middlewares/Log';
 
 class App {
@@ -12,8 +14,12 @@ class App {
     static loadConfiguration() {
         Log.info('Configuration :: Booting');
         dotenv.config({ path: path.join(__dirname, '../../.env') });
-        // eslint-disable-next-line no-console
-        console.log('I came here');
+    }
+
+    // Loads Express Server
+    static loadServer() {
+        Log.info('Server :: Booting @ Master...');
+        Express.init();
     }
 }
 

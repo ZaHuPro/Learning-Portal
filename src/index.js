@@ -13,3 +13,8 @@ App.clearConsole();
  * Load Configuration
  */
 App.loadConfiguration();
+
+/**
+ * Run the Server
+ */
+App.loadServer();
