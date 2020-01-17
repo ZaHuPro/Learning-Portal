@@ -14,6 +14,11 @@ App.clearConsole();
  */
 App.loadConfiguration();
 
+/*
+* Run the Database pool
+*/
+App.loadDatabase();
+
 /**
  * Run the Server
  */

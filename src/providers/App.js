@@ -3,6 +3,7 @@ import * as dotenv from 'dotenv';
 
 import Express from './Express';
 import Log from '../middlewares/Log';
+import DB from './Database';
 
 class App {
     // Clear the console
@@ -16,9 +17,15 @@ class App {
         dotenv.config({ path: path.join(__dirname, '../../.env') });
     }
 
+    // Loads the DB Pool
+    static loadDatabase() {
+        Log.info('DB :: Booting @ Master...');
+        DB.init();
+    }
+
     // Loads Express Server
     static loadServer() {
-        Log.info('Server :: Booting @ Master...');
+        Log.info('Server :: Booting...');
         Express.init();
     }
 }
