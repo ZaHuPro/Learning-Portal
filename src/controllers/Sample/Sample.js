@@ -1,5 +1,5 @@
 import { successResponce } from '../../utils/Exchange';
-import Refresh from '../../utils/Refresh';
+import Refresh from '../../utils/SampleInsert';
 
 class Sample {
     static async index(req, res) {

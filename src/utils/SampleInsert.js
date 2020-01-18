@@ -2,10 +2,6 @@
 import faker from 'faker';
 import DB from '../providers/Database';
 
-function getArrayRandomElement(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
-}
-
 async function BulkInsert() {
     const Exams = [];
     const Subjects = [];
@@ -16,12 +12,12 @@ async function BulkInsert() {
     const ansserAre = ['option_1', 'option_2', 'option_3', 'option_4'];
 
     for (let i = 1; i <= 2; i += 1) {
-        Exams.push({ title: faker.commerce.department() });
+        Exams.push({ title: faker.name.jobType() });
     }
     const createdExams = await DB.models.Exam.bulkCreate(Exams);
     await createdExams.map((exam) => {
-        Subjects.push({ title: faker.commerce.department(), exam_id: exam.id });
-        Subjects.push({ title: faker.commerce.department(), exam_id: exam.id });
+        Subjects.push({ title: faker.name.jobTitle(), exam_id: exam.id });
+        Subjects.push({ title: faker.name.jobTitle(), exam_id: exam.id });
         return exam;
     });
 
@@ -34,31 +30,31 @@ async function BulkInsert() {
 
     const createdTopic = await DB.models.Topic.bulkCreate(Topics);
     await createdTopic.map((top) => {
-        Chapters.push({ title: faker.commerce.department(), topic_id: top.id });
-        Chapters.push({ title: faker.commerce.department(), topic_id: top.id });
+        Chapters.push({ title: faker.commerce.productName(), topic_id: top.id });
+        Chapters.push({ title: faker.commerce.productName(), topic_id: top.id });
         return top;
     });
 
     const createdChapter = await DB.models.Chapter.bulkCreate(Chapters);
     await createdChapter.map((chap) => {
         Questions.push({
-            title: faker.lorem.lines(),
-            option_1: faker.lorem.word(),
-            option_2: faker.lorem.word(),
-            option_3: faker.lorem.word(),
-            option_4: faker.lorem.word(),
-            answer: getArrayRandomElement(ansserAre),
-            type: getArrayRandomElement(QuesTypes),
+            title: faker.lorem.sentence(5, 10),
+            option_1: faker.commerce.productName(),
+            option_2: faker.commerce.productMaterial(),
+            option_3: faker.address.state(),
+            option_4: faker.commerce.product(),
+            answer: faker.helpers.randomize(ansserAre),
+            type: faker.helpers.randomize(QuesTypes),
             chapter_id: chap.id,
         });
         Questions.push({
-            title: faker.lorem.lines(),
-            option_1: faker.lorem.word(),
-            option_2: faker.lorem.word(),
-            option_3: faker.lorem.word(),
-            option_4: faker.lorem.word(),
-            answer: getArrayRandomElement(ansserAre),
-            type: getArrayRandomElement(QuesTypes),
+            title: faker.lorem.sentence(5, 10),
+            option_1: faker.commerce.productName(),
+            option_2: faker.commerce.productMaterial(),
+            option_3: faker.address.state(),
+            option_4: faker.commerce.product(),
+            answer: faker.helpers.randomize(ansserAre),
+            type: faker.helpers.randomize(QuesTypes),
             chapter_id: chap.id,
         });
         return chap;

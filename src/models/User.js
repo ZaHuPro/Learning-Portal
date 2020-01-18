@@ -14,15 +14,9 @@ module.exports = function UserIS(sequelize, DataTypes) {
             validate: {
                 notEmpty: true,
             },
+            unique: true,
         },
         password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                notEmpty: true,
-            },
-        },
-        hash: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
@@ -35,6 +29,10 @@ module.exports = function UserIS(sequelize, DataTypes) {
             validate: {
                 notEmpty: true,
             },
+        },
+        joined_ip: {
+            type: DataTypes.STRING,
+            allowNull: true,
         },
     }, {
         timestamps: true,
