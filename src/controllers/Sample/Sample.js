@@ -4,10 +4,7 @@ import Refresh from '../../utils/SampleInsert';
 class Sample {
     static async index(req, res) {
         await Refresh();
-        return successResponce(req, res, 'You have reached Learning Portal', 202, {
-            ip: req.requestIp.clientIp,
-            user: req.header('User-Agent'),
-        });
+        return successResponce(req, res, 'Sample data updated to Learning Portal', 202, {});
     }
 }
 

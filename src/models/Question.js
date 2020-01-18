@@ -22,28 +22,28 @@ module.exports = function QuestionIS(sequelize, DataTypes) {
                 notEmpty: true,
             },
         },
-        option_1: {
+        option_a: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 notEmpty: true,
             },
         },
-        option_2: {
+        option_b: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 notEmpty: true,
             },
         },
-        option_3: {
+        option_c: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 notEmpty: true,
             },
         },
-        option_4: {
+        option_d: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {

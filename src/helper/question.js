@@ -1,70 +1,85 @@
 import DB from '../providers/Database';
-import Common from './commom';
 
 class Questions {
     static async RandomQuestions({ id, type }) {
-        const fetchData = {
-            exist: false,
-            type: false,
+        const quesryIs = {
+            include: [
+                {
+                    model: DB.models.Answer,
+                    required: true,
+                    attributes: [],
+                },
+                {
+                    model: DB.models.Chapter,
+                    required: true,
+                    attributes: [],
+                    include: [
+                        {
+                            model: DB.models.Topic,
+                            required: true,
+                            attributes: [],
+                            include: [
+                                {
+                                    model: DB.models.Subject,
+                                    required: true,
+                                    attributes: [],
+                                    include: [
+                                        {
+                                            model: DB.models.Exam,
+                                            required: true,
+                                            attributes: [],
+
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+            limit: 10,
+            attributes: ['id', 'title', 'type', 'option_a', 'option_b', 'option_c', 'option_d'],
         };
 
-        // switch (type) {
-        // case 'exam':
-        //     fetchData.gone = 'yes';
-        //     fetchData.exist = await Common.isValidData(DB.models.Exam, id);
-        // }
-
-        if (type) {
-            switch (type.toLowerCase()) {
-            case 'exam':
-                if (await Common.isValidData(DB.models.Exam, id)) {
-                    fetchData.exist = true;
-                    fetchData.type = DB.models.Exam;
-                }
-                break;
-            case 'subject':
-                if (await Common.isValidData(DB.models.QueSubjectstion, id)) {
-                    fetchData.exist = true;
-                    fetchData.type = DB.models.Subject;
-                }
-                break;
-            case 'chapter':
-                if (await Common.isValidData(DB.models.Chapter, id)) {
-                    fetchData.exist = true;
-                    fetchData.type = DB.models.Chapter;
-                }
-                break;
-            case 'topic':
-                if (await Common.isValidData(DB.models.Topic, id)) {
-                    fetchData.exist = true;
-                    fetchData.type = DB.models.Topic;
-                }
-                break;
-            case 'question':
-                if (await Common.isValidData(DB.models.Question, id)) {
-                    fetchData.exist = true;
-                    fetchData.type = DB.models.Question;
-                }
-                break;
-            default:
-                fetchData.exist = false;
-                fetchData.type = false;
+        if (type && id) {
+            if (type.toLowerCase() === 'exam') {
+                quesryIs.include[0].include[0].include[0].include[0].where = {
+                    id,
+                };
+            } else if (type.toLowerCase() === 'subject') {
+                quesryIs.include[0].include[0].include[0].where = {
+                    id,
+                };
+            } else if (type.toLowerCase() === 'topic') {
+                quesryIs.include[0].include[0].where = {
+                    id,
+                };
+            } else if (type.toLowerCase() === 'chapter') {
+                quesryIs.include[0].where = {
+                    id,
+                };
+            } else if (type.toLowerCase() === 'question') {
+                quesryIs.include[0].where = {
+                    id,
+                };
             }
         }
-        if (id && !type) {
-
-        }
-        const quesryIs = {
-            // order: [
-            //     [DB.Sequelize.fn('RANDOM')],
-            // ],
-            limit: 10,
-        };
-
         const getData = await DB.models.Question.findAll(quesryIs);
-        return {
-            getData,
-        };
+        return getData;
+    }
+
+    static async getQuestions({ id }) {
+        const getData = await DB.models.Question.findOne({
+            where: {
+                id,
+            },
+        });
+        return getData;
+    }
+
+    static async fetchQuestionCount(whereIs) {
+        const getData = await DB.models.Question.count(whereIs);
+        return getData;
     }
 }
 

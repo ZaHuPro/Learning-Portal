@@ -2,11 +2,12 @@ import generator from 'generate-password';
 
 class Common {
     static async isValidData(thisModel, idIs) {
-        return await thisModel.count({
+        const countIs = await thisModel.count({
             where: {
                 id: idIs,
             },
-        }) > 0;
+        });
+        return countIs > 0;
     }
 
     static async randomGenerator(size) {

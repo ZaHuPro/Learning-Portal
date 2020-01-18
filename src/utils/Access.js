@@ -51,12 +51,11 @@ exports.shouldBeLoggedIn = async function shouldBeLoggedIn(req, res, next) {
                 id: deecodeToken.id,
                 email: deecodeToken.email,
             };
-            next();
+            return next();
         }
-        errorResponce(req, res, deecodeToken.msg, 403);
-    } else {
-        errorResponce(req, res, 'JWT token not found', 403);
+        return errorResponce(req, res, deecodeToken.msg, 403);
     }
+    return errorResponce(req, res, 'JWT token not found', 403);
 };
 
 exports.mightBeLoggedIn = async function mightBeLoggedIn(req, res, next) {
@@ -68,16 +67,14 @@ exports.mightBeLoggedIn = async function mightBeLoggedIn(req, res, next) {
                 email: deecodeToken.email,
             };
         }
-        next();
-    } else {
-        next();
+        return next();
     }
+    return next();
 };
 
 exports.shouldNotLoggedIn = async function shouldNotLoggedIn(req, res, next) {
     if (req.headers.authorization) {
-        errorResponce(req, res, 'JWT token already found!', 403);
-    } else {
-        next();
+        return errorResponce(req, res, 'JWT token already found!', 403);
     }
+    return next();
 };

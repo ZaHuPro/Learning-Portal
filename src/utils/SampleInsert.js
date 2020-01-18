@@ -9,7 +9,7 @@ async function BulkInsert() {
     const Chapters = [];
     const Questions = [];
     const QuesTypes = ['EASY', 'MEDIUM', 'HARD'];
-    const ansserAre = ['option_1', 'option_2', 'option_3', 'option_4'];
+    const ansserAre = ['a', 'b', 'c', 'd'];
 
     for (let i = 1; i <= 2; i += 1) {
         Exams.push({ title: faker.name.jobType() });
@@ -39,20 +39,20 @@ async function BulkInsert() {
     await createdChapter.map((chap) => {
         Questions.push({
             title: faker.lorem.sentence(5, 10),
-            option_1: faker.commerce.productName(),
-            option_2: faker.commerce.productMaterial(),
-            option_3: faker.address.state(),
-            option_4: faker.commerce.product(),
+            option_a: faker.commerce.productName(),
+            option_b: faker.commerce.productMaterial(),
+            option_c: faker.address.state(),
+            option_d: faker.commerce.product(),
             answer: faker.helpers.randomize(ansserAre),
             type: faker.helpers.randomize(QuesTypes),
             chapter_id: chap.id,
         });
         Questions.push({
             title: faker.lorem.sentence(5, 10),
-            option_1: faker.commerce.productName(),
-            option_2: faker.commerce.productMaterial(),
-            option_3: faker.address.state(),
-            option_4: faker.commerce.product(),
+            option_a: faker.commerce.productName(),
+            option_b: faker.commerce.productMaterial(),
+            option_c: faker.address.state(),
+            option_d: faker.commerce.product(),
             answer: faker.helpers.randomize(ansserAre),
             type: faker.helpers.randomize(QuesTypes),
             chapter_id: chap.id,
