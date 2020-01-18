@@ -9,7 +9,7 @@ module.exports = function QuestionIS(sequelize, DataTypes) {
             unique: true,
         },
         title: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false,
             validate: {
                 notEmpty: true,

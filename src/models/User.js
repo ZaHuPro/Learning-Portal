@@ -22,6 +22,13 @@ module.exports = function UserIS(sequelize, DataTypes) {
                 notEmpty: true,
             },
         },
+        hash: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                notEmpty: true,
+            },
+        },
         salt: {
             type: DataTypes.STRING,
             allowNull: false,
