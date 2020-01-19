@@ -6,6 +6,7 @@ import compress from 'compression';
 import express from 'express';
 import userAgent from 'express-useragent';
 import ipware from 'ipware';
+import expressSanitizer from 'express-sanitizer';
 import Log from './Log';
 import Locals from '../providers/Locals';
 
@@ -40,6 +41,9 @@ class Http {
             req.requestIp = get_ip(req);
             next();
         });
+
+        // Express sanitizer for input sanitization
+        _express.use(expressSanitizer());
 
         return _express;
     }

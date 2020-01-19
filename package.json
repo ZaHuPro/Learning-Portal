@@ -50,6 +50,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-sanitizer": "^1.0.5",
     "express-useragent": "^1.0.13",
     "express-validator": "^6.3.1",
     "faker": "^4.1.0",
