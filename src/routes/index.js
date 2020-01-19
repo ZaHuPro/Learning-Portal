@@ -1,7 +1,9 @@
 /* eslint-disable import/named */
 import { Router } from 'express';
 
-import { registerRules, loginRules } from '../utils/Validator';
+import {
+    registerRules, loginRules, questionRules, answerRules,
+} from '../utils/Validator';
 import { validateRequest } from '../utils/Exchange';
 import { shouldBeLoggedIn, mightBeLoggedIn, shouldNotLoggedIn } from '../utils/Access';
 import homeController from '../controllers/Home/Home';
@@ -19,8 +21,8 @@ router.post('/register', [shouldNotLoggedIn, registerRules, validateRequest, aut
 router.post('/login', [shouldNotLoggedIn, loginRules, validateRequest, authyController.login]);
 
 
-router.post('/questions', shouldBeLoggedIn, randomController.index);
-router.post('/answer', shouldBeLoggedIn, answerController.index);
+router.post('/questions', shouldBeLoggedIn, questionRules, validateRequest, randomController.index);
+router.post('/answer', shouldBeLoggedIn, answerRules, validateRequest, answerController.index);
 router.post('/result', shouldBeLoggedIn, answerController.result);
 
 

@@ -1,5 +1,6 @@
 import { check, body } from 'express-validator';
 import userModule from '../helper/user';
+import questionModule from '../helper/question';
 
 const isEmail = check('email')
     .isEmail()
@@ -23,5 +24,38 @@ const isEmailExist = body('email').custom(async (value, { req }) => {
     return true;
 });
 
+
+const isUUID = check('id')
+    .isUUID()
+    .optional()
+    .withMessage('Provied a valid UUID ID!');
+
+const isValidType = check('type')
+    .isIn(['exam', 'subject', 'topic', 'chapter', 'question'])
+    .optional()
+    .withMessage('Provied a valid type!, must be exam, subject, topic, chapter or question');
+
+const isAnswer = check('answer')
+    .isIn(['a', 'b', 'c', 'd', 'skip'])
+    .withMessage('Provied a valid answer!, must be a, b, c, d or skip');
+
+
+const isUUIDMust = check('id')
+    .isUUID()
+    .withMessage('Provied a valid UUID ID!');
+
+
+const isQuestionExist = body('id').custom(async (value, { req }) => {
+    if (await questionModule.fetchQuestionCount({
+        where: {
+            id: req.body.id,
+        },
+    }) === 0) {
+        throw new Error('This Question ID not fount in DB');
+    }
+    return true;
+});
 export const registerRules = [isEmail, isPassword, isEmailTaken];
 export const loginRules = [isEmail, isPassword, isEmailExist];
+export const questionRules = [isUUID, isValidType];
+export const answerRules = [isAnswer, isUUIDMust, isQuestionExist];
